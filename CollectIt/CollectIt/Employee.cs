@@ -5,11 +5,16 @@ using System.Collections.Generic;
 namespace CollectIt
 {
 
-    public class EmployeeComparer : IComparer<Employee>
+    public class EmployeeComparer : IEqualityComparer<Employee>
     {
-        public int Compare(Employee x, Employee y)
+        public bool Equals(Employee x, Employee y)
         {
-            return String.Compare(x.Name, y.Name, StringComparison.CurrentCulture);
+            return x.Name == y.Name;
+        }
+
+        public int GetHashCode(Employee obj)
+        {
+            return obj.Name.GetHashCode();
         }
     }
 

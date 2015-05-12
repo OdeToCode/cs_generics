@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QueryIt
 {
@@ -12,22 +10,13 @@ namespace QueryIt
         public DbSet<Employee> Employees { get; set; }
     }
 
-    public interface IReadOnlyRepository<out T> : IDisposable
-    {
-        T FindById(int id);
-        IQueryable<T> FindAll();
-    }
-
-    public interface IWriteOnlyRepository<in T> : IDisposable
+    public interface IRepository<T> : IDisposable
     {
         void Add(T newEntity);
         void Delete(T entity);
         int Commit();
-    }
-
-    public interface IRepository<T> : IReadOnlyRepository<T>, IWriteOnlyRepository<T>
-    {
-       
+        T FindById(int id);
+        IQueryable<T> FindAll();
     }
 
     public class SqlRepository<T> : IRepository<T> where T : class, IEntity

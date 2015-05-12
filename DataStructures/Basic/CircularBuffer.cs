@@ -1,4 +1,4 @@
-﻿namespace DataStructures
+﻿namespace DataStructures.Basic
 {
     public class CircularBuffer
     {

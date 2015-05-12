@@ -1,4 +1,5 @@
 ﻿using System;
+using DataStructures.Basic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DataStructures.Tests

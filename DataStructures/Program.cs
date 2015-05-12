@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+using DataStructures.Basic;
 
 namespace DataStructures
 {
-
     class Program
     {
         static void Main(string[] args)
         {
             var buffer = new CircularBuffer();
 
-                  
             ProcessInput(buffer);       
             ProcessBuffer(buffer);
         }

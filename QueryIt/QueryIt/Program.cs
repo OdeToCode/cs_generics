@@ -20,19 +20,17 @@ namespace QueryIt
                 AddManagers(employeeRepository);
                 CountEmployees(employeeRepository);
                 QueryEmployees(employeeRepository);
-                DumpPeople(employeeRepository);
-
-                IEnumerable<Person> temp = employeeRepository.FindAll();
+                DumpPeople(employeeRepository);   
             }
         }
 
-        private static void AddManagers(IWriteOnlyRepository<Manager> employeeRepository)
+        private static void AddManagers(IRepository<Employee> employeeRepository)
         {
             employeeRepository.Add(new Manager { Name = "Alex" });
             employeeRepository.Commit();
         }
 
-        private static void DumpPeople(IReadOnlyRepository<Person> employeeRepository)
+        private static void DumpPeople(IRepository<Employee> employeeRepository)
         {
             var employees = employeeRepository.FindAll();
             foreach (var employee in employees)

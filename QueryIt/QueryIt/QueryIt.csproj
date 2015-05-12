@@ -54,6 +54,8 @@
     <Compile Include="Model.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Temp\DataAccess.bak" />
+    <None Include="Temp\Model.bak" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
