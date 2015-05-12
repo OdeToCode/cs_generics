@@ -1,25 +1,22 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace DataStructures
 {
+
     class Program
     {
         static void Main(string[] args)
         {
-            var buffer = new Buffer<double>();
+            var buffer = new CircularBuffer();
 
-            
-            ProcessInput(buffer);
-
-            foreach (var item in buffer)
-            {
-                Console.WriteLine(item);
-            }
-
+                  
+            ProcessInput(buffer);       
             ProcessBuffer(buffer);
         }
 
-        private static void ProcessBuffer(IBuffer<double> buffer)
+        private static void ProcessBuffer(CircularBuffer buffer)
         {
             var sum = 0.0;
             Console.WriteLine("Buffer: ");
@@ -30,7 +27,7 @@ namespace DataStructures
             Console.WriteLine(sum);
         }
 
-        private static void ProcessInput(IBuffer<double> buffer)
+        private static void ProcessInput(CircularBuffer buffer)
         {
             while (true)
             {

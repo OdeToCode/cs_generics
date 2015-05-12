@@ -1,67 +1,53 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
-namespace DataStructures
+﻿namespace DataStructures
 {
-    public interface IBuffer<T> : IEnumerable<T> 
+    public class CircularBuffer
     {
-        bool IsEmpty { get; }
-        void Write(T value);
-        T Read();
-    }
+        private readonly double[] _buffer;
+        private int _start;
+        private int _end;
 
-    public class Buffer<T> : IBuffer<T>
-    {
-        protected Queue<T> _queue = new Queue<T>();
-
-        public virtual bool IsEmpty
+        public CircularBuffer()
+            : this(capacity: 10)
         {
-            get { return _queue.Count == 0; }
         }
 
-        public virtual void Write(T value)
+        public CircularBuffer(int capacity)
         {
-            _queue.Enqueue(value);
+            _buffer = new double[capacity + 1];
+            _start = 0;
+            _end = 0;
         }
 
-        public virtual T Read()
+        public void Write(double value)
         {
-            return _queue.Dequeue();
-        }
-
-        public IEnumerator<T> GetEnumerator()
-        {
-            foreach (var item in _queue)
+            _buffer[_end] = value;
+            _end = (_end + 1) % _buffer.Length;
+            if (_end == _start)
             {
-                // ...
-                yield return item;
+                _start = (_start + 1) % _buffer.Length;
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public double Read()
         {
-            return GetEnumerator();
-        }
-    }
-   
-    public class CircularBuffer<T>  : Buffer<T>
-    {
-        int _capacity;
-        public CircularBuffer(int capacity = 10)
-        {
-            _capacity = capacity;
+            var result = _buffer[_start];
+            _start = (_start + 1) % _buffer.Length;
+            return result;
         }
 
-        public override void Write(T value)
+        public int Capacity
         {
-            base.Write(value);
-            if (_queue.Count > _capacity)
-            {
-                _queue.Dequeue();
-            }
+            get { return _buffer.Length; }
         }
 
-        public bool IsFull { get { return _queue.Count == _capacity; } }
+        public bool IsEmpty
+        {
+            get { return _end == _start; }
+        }
 
+        public bool IsFull
+        {
+            get { return (_end + 1) % _buffer.Length == _start; }
+        }
     }
 }
